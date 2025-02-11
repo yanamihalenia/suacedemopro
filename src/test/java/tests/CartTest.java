@@ -19,5 +19,6 @@ public class CartTest extends BaseTest{
         String productNameInCart = driver.findElement(By.className(cartPage.ITEM_NAME)).getText();
         softAssert.assertEquals(productPriceInCart, productPrice, "Product prices are not match.");
         softAssert.assertEquals(productNameInCart, SAUCE_LABS_BOLT_T_SHIRT, "Product names are not match.");
+        softAssert.assertAll();
     }
 }
