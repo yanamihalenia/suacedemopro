@@ -18,5 +18,5 @@ public interface ITestConstants {
     String ADD_SAUCE_LABS_FLEECE_JACKET = ADD_TO_CART + "-sauce-labs-fleece-jacket";
     String ADD_SAUCE_LABS_ONE_SIE = ADD_TO_CART + "-sauce-labs-onesie";
     String ADD_ALL_THE_THINGS_T_SHIRT_RED = ADD_TO_CART + "-test.allthethings()-t-shirt-(red)";
-    String PRICE = "//*[contains(@class,'inventory_item_price')]";
+    String PRICE_SAUCE_LABS_BOLT_T_SHIRT = "(//*[contains(@class,'inventory_item_price')])[3]";
 }

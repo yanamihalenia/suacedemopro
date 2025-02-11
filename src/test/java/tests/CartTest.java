@@ -3,22 +3,21 @@ package tests;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class CartTest extends BaseTest{
 
     @Test
     public void checkAddingProductToCartTest(){
-        String productPrice;
-        String productNameInCart;
-        String productPriceInCart;
+        SoftAssert softAssert = new SoftAssert();
         loginPage.openPage(LOGIN_PAGE_URL);
         loginPage.login(USERNAME, PASSWORD);
-        productPrice = driver.findElement(By.xpath("(//*[contains(@class,'inventory_item_price')])[3]")).getText();
+        String productPrice = driver.findElement(By.xpath(PRICE_SAUCE_LABS_BOLT_T_SHIRT)).getText();
         productsPage.addProductToCart(ADD_SAUCE_LABS_BOLT_T_SHIRT);
         headerPage.clickCart();
-        productPriceInCart = driver.findElement(By.xpath("//*[contains(@class,'inventory_item_price')]")).getText();
-        productNameInCart = driver.findElement(By.className("inventory_item_name")).getText();
-        Assert.assertEquals(productPriceInCart, productPrice);
-        Assert.assertEquals(productNameInCart, SAUCE_LABS_BOLT_T_SHIRT);
+        String productPriceInCart = driver.findElement(By.xpath(cartPage.PRICE)).getText();
+        String productNameInCart = driver.findElement(By.className(cartPage.ITEM_NAME)).getText();
+        softAssert.assertEquals(productPriceInCart, productPrice, "Product prices are not match.");
+        softAssert.assertEquals(productNameInCart, SAUCE_LABS_BOLT_T_SHIRT, "Product names are not match.");
     }
 }
