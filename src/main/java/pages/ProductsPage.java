@@ -12,15 +12,15 @@ public class ProductsPage extends HeaderPage {
     public ProductsPage(WebDriver driver) {
         super(driver);
     }
+//  For adding a couple items:
+//    public void addProduct(String... productNames){
+//        for (String productName : productNames) {
+//            driver.findElement(By.xpath((String.format(ADD_PRODUCT_TO_CART_BUTTON, productNames)))).click();
+//        }
+//    }
 
-    public void addProductToCart(String item){
-        driver.findElement(By.id(item)).click();
-    }
-
-    public void addProduct(String... productNames){
-        for (String productName : productNames) {
-            driver.findElement(By.xpath((String.format(PRODUCT_ITEM, productNames)))).click();
-        }
+    public void addProduct(String productName){
+            driver.findElement(By.xpath((String.format(ADD_PRODUCT_TO_CART_BUTTON, productName)))).click();
     }
 
     public boolean isAddToCartButtonDisplayed(String productName){
