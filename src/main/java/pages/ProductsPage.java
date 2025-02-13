@@ -16,6 +16,7 @@ public class ProductsPage extends HeaderPage {
     private static final String REMOVE_PRODUCT_FROM_CART_BUTTON = PRODUCT_ITEM + "//button[contains(text(),'Remove')]";
     private static final String PRODUCT_PRICE = PRODUCT_ITEM + "//*[@class=\"inventory_item_price\"]";
     private static final String FILTER_LOCATOR = "//*[@class=\"product_sort_container\"]";
+    private static final String PRODUCT_NAME = PRODUCT_ITEM + "//*[@class=\"inventory_item_name \"]";
 
     public ProductsPage(WebDriver driver) {
         super(driver);
@@ -44,13 +45,13 @@ public class ProductsPage extends HeaderPage {
     }
 
     public List<String> getListOfItems(){
-        return driver.findElements(By.xpath("//*[@class=\"inventory_item_name \"]")).stream()
+        return driver.findElements(By.xpath(PRODUCT_NAME)).stream()
                 .map(webElement -> webElement.getText()
                 .trim()).collect(Collectors.toList());
     }
 
     public List<Double> getListOfPrices(){
-        return driver.findElements(By.xpath("//*[@class=\"inventory_item_price\"]")).stream()
+        return driver.findElements(By.xpath(PRODUCT_PRICE)).stream()
                 .map(webElement -> Double.parseDouble(webElement.getText().replaceAll("\\$", "")
                         .trim())).collect(Collectors.toList());
     }
