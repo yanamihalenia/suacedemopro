@@ -8,6 +8,14 @@ public class LoginTest extends BaseTest {
     public static final String ERROR_PASSWORD_TEXT_MESSAGE = "Epic sadface: Password is required";
     public static final String ERROR_USERNAME_AND_PASSWORD_TEXT_MESSAGE = "Epic sadface: Username and password do not match any user in this service";
 
+    @Test
+    //команда для запуска: mvn -Dtest=LoginTest -Dusername=standard_user -Dpassword=secret_sauce test
+    public void successLoginTest(){
+        loginPage.openPage(LOGIN_PAGE_URL);
+        loginPage.login(
+                System.getProperty("username"),
+                System.getProperty("password"));
+    }
 
     @Test
     public void loginWithEmptyUsernameTest(){

@@ -1,10 +1,32 @@
 package tests;
 
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class CartTest extends BaseTest{
+
+    @DataProvider(name = "products")
+    public Object[][] productsAndPrices(){
+        return new Object[][]{
+                {SAUCE_LABS_BACKPACK, "$29.99"},
+                {SAUCE_LABS_BOLT_T_SHIRT, "$15.99"},
+                {SAUCE_LABS_BIKE_LIGHT, "$9.99"},
+                {SAUCE_LABS_FLEECE_JACKET, "$49.99"},
+                {SAUCE_LABS_ONE_SIE, "$7.99"},
+                {ALL_THE_THINGS_T_SHIRT_RED, "$15.99"},
+        };
+    }
+
+    @Test(dataProvider = "products")
+    public void checkProductPriceInCartTest(String productName, String price){
+        loginPage.openPage(LOGIN_PAGE_URL);
+        loginPage.login(USERNAME,PASSWORD);
+        productsPage.addProduct(productName);
+        headerPage.clickCart();
+        Assert.assertEquals(cartPage.getProductPrice(productName), price);
+    }
 
     @Test
     public void checkAddingProductToCartTest(){
@@ -27,7 +49,7 @@ public class CartTest extends BaseTest{
         loginPage.login(USERNAME,PASSWORD);
         productsPage.addProduct(SAUCE_LABS_BACKPACK);
         headerPage.clickCart();
-        Assert.assertEquals(cartPage.getProductPrice(SAUCE_LABS_BOLT_T_SHIRT), "15");
+        Assert.assertEquals(cartPage.getProductPrice(SAUCE_LABS_BACKPACK), "$29.99");
     }
 
     @Test
