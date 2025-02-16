@@ -22,11 +22,11 @@ public class ProductsPage extends HeaderPage {
         super(driver);
     }
 //  For adding a couple items:
-//    public void addProduct(String... productNames){
-//        for (String productName : productNames) {
-//            driver.findElement(By.xpath((String.format(ADD_PRODUCT_TO_CART_BUTTON, productNames)))).click();
-//        }
-//    }
+    public void addCoupleProducts(String... productNames){
+        for (String productName : productNames) {
+            driver.findElement(By.xpath((String.format(ADD_PRODUCT_TO_CART_BUTTON, productName)))).click();
+        }
+    }
 
     public void addProduct(String productName){
             driver.findElement(By.xpath((String.format(ADD_PRODUCT_TO_CART_BUTTON, productName)))).click();
@@ -82,5 +82,9 @@ public class ProductsPage extends HeaderPage {
         WebElement selectElement = driver.findElement(By.xpath(FILTER_LOCATOR));
         Select dropdown = new Select(selectElement);
         dropdown.selectByValue(sortOption);
+    }
+
+    public String getUrl(){
+        return driver.getCurrentUrl();
     }
 }

@@ -15,5 +15,7 @@ public interface ITestConstants {
     String FILTER_FROM_Z_TO_A = "za";
     String FILTER_FROM_LOW_TO_HIGH_PRICE = "lohi";
     String FILTER_FROM_HIGH_TO_LOW_PRICE = "hilo";
-
+    String FIRST_NAME = "John";
+    String LAST_NAME = "Doe";
+    String POSTAL_CODE = "ESD 45F";
 }
