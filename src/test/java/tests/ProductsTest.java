@@ -10,7 +10,6 @@ public class ProductsTest extends BaseTest {
     public void isAddToCartButtonDisplayedTest(){
         loginPage.openPage(IConstants.LOGIN_PAGE_URL);
         loginPage.login(USERNAME,PASSWORD);
-        productsPage.addProduct(SAUCE_LABS_BACKPACK);
         Assert.assertTrue(productsPage.isAddToCartButtonDisplayed(SAUCE_LABS_BACKPACK));
     }
 
