@@ -17,8 +17,9 @@ public class CartPage extends HeaderPage{
         super(driver);
     }
 
-    public void openPage(String url){
+    public CartPage openCartPage(String url){
         driver.get(url);
+        return this;
     }
 
     public String getProductPrice(String productName){
@@ -37,7 +38,7 @@ public class CartPage extends HeaderPage{
         driver.findElement(By.xpath(String.format(REMOVE_BUTTON, productName))).click();
     }
 
-    public boolean isProductDisaplyed(String productName){
+    public boolean isProductDisplayed(String productName){
         return !driver.findElements(By.xpath(String.format(PRODUCT_ITEM, productName))).isEmpty();
     }
 

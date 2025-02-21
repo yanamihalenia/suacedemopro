@@ -46,8 +46,9 @@ public class CartTest extends BaseTest{
     @Test
     public void addProductToCartTest(){
         loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(USERNAME,PASSWORD);
-        productsPage.addProduct(SAUCE_LABS_BACKPACK);
+        loginPage
+                .login(USERNAME,PASSWORD)
+                .addProduct(SAUCE_LABS_BACKPACK);
         headerPage.clickCart();
         Assert.assertEquals(cartPage.getProductPrice(SAUCE_LABS_BACKPACK), "$29.99");
     }
@@ -59,5 +60,18 @@ public class CartTest extends BaseTest{
         productsPage.addProduct(SAUCE_LABS_BACKPACK);
         cartPage.openPage(CART_PAGE_URL);
         Assert.assertEquals(cartPage.getProductQuantity(),2);
+    }
+
+    @Test
+    public void removeItemFromCartTest() {
+        loginPage
+                .openPage(LOGIN_PAGE_URL);
+        loginPage
+                .login(USERNAME, PASSWORD)
+                .addProduct(SAUCE_LABS_BACKPACK);
+        cartPage
+                .openCartPage(CART_PAGE_URL)
+                .removeProductFromCart(SAUCE_LABS_BACKPACK);
+        Assert.assertFalse(cartPage.isProductDisplayed(SAUCE_LABS_BACKPACK));
     }
 }

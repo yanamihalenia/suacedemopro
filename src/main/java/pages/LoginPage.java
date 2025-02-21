@@ -14,10 +14,11 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    public void login(String userName, String password){
+    public ProductsPage login(String userName, String password){
         driver.findElement(USERNAME_INPUT).sendKeys(userName);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
+        return new ProductsPage(driver);
     }
 
     public String getErrorMessageText(){

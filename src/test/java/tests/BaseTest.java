@@ -19,6 +19,7 @@ public class BaseTest implements IConstants, ITestConstants {
     CheckoutYourInfoPage checkoutYourInfoPage;
     CheckoutOverviewPage checkoutOverviewPage;
     CheckoutCompletePage checkoutCompletePage;
+    LoginPageFactory loginPageFactory;
 
 
     @BeforeMethod
@@ -38,6 +39,7 @@ public class BaseTest implements IConstants, ITestConstants {
         checkoutYourInfoPage = new CheckoutYourInfoPage(driver);
         checkoutOverviewPage = new CheckoutOverviewPage(driver);
         checkoutCompletePage = new CheckoutCompletePage(driver);
+        loginPageFactory = new LoginPageFactory(driver);
     }
 
     @AfterMethod
