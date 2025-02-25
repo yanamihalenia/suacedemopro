@@ -6,19 +6,19 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class ProductsTest extends BaseTest {
+public class ProductsTest extends Preconditions {
 
     @Test
     public void isAddToCartButtonDisplayedTest(){
         loginPage.openPage(IConstants.LOGIN_PAGE_URL);
-        loginPage.login(USERNAME,PASSWORD);
+        loginPage.login(userWithCorrectData);
         Assert.assertTrue(productsPage.isAddToCartButtonDisplayed(SAUCE_LABS_BACKPACK));
     }
 
     @Test
     public void isRemoveButtonDisplayedTest(){
         loginPage.openPage(IConstants.LOGIN_PAGE_URL);
-        loginPage.login(USERNAME,PASSWORD);
+        loginPage.login(userWithCorrectData);
         productsPage.addProduct(SAUCE_LABS_BACKPACK);
         Assert.assertTrue(productsPage.isRemoveButtonDisplayed(SAUCE_LABS_BACKPACK));
     }
@@ -28,7 +28,7 @@ public class ProductsTest extends BaseTest {
         List<String> listOfItems;
         List<Double> listOfPrices;
         loginPage.openPage(IConstants.LOGIN_PAGE_URL);
-        loginPage.login(USERNAME,PASSWORD);
+        loginPage.login(userWithCorrectData);
         productsPage.selectOptionInFilter(FILTER_FROM_A_TO_Z);
         listOfItems = productsPage.getListOfItems();
         productsPage.checkFiltrationFromAtoZ(listOfItems);

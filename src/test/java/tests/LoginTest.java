@@ -14,13 +14,13 @@ public class LoginTest extends Preconditions {
     //команда для запуска: mvn -Dtest=LoginTest -Dusername=standard_user -Dpassword=secret_sauce test
     public void successLoginTest(){
         loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(USERNAME, PASSWORD);
+        loginPage.login(userWithCorrectData);
     }
 
     @Test
     public void loginWithEmptyUsernameTest(){
         loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login("", PASSWORD);
+        loginPage.login(userWithEmptyUsername);
         Assert.assertEquals(loginPage.getErrorMessageText(), ERROR_USERNAME_TEXT_MESSAGE);
     }
 
@@ -34,41 +34,41 @@ public class LoginTest extends Preconditions {
     @Test
     public void loginWithIncorrectFieldsTest(){
         loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login("dfsfdss", "877hejfs");
+        loginPage.login(userWithIncorrectData);
         Assert.assertEquals(loginPage.getErrorMessageText(), ERROR_USERNAME_AND_PASSWORD_TEXT_MESSAGE);
     }
 
     @Test
     public void loginWithEmptyFieldsTest(){
         loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login("", "");
+        loginPage.login(userWithEmptyUsernameAndPassword);
         Assert.assertEquals(loginPage.getErrorMessageText(), ERROR_USERNAME_TEXT_MESSAGE);
     }
 
 
 
 
-    @Test
-    public void loginWithoutPageFactory(){
-        driver.get("https://the-internet.herokuapp.com/add_remove_elements/");
-        WebElement addButton = driver.findElement(By.xpath("//button[contains(.,'Add')]"));
-        addButton.click();
-        WebElement deleteButton = driver.findElement(By.xpath("//button[contains(.,'Delete')]"));
-        deleteButton.click();
-
-        addButton.click();
-        deleteButton.click();
-    }
-
-    @Test
-    public void loginWithPageFactory(){
-        driver.get("https://the-internet.herokuapp.com/add_remove_elements/");
-        WebElement addButton = loginPageFactory.getAddButton();
-        addButton.click();
-        WebElement deleteButton = loginPageFactory.getDeleteButton();
-        deleteButton.click();
-
-        addButton.click();
-        deleteButton.click();
-    }
+//    @Test
+//    public void loginWithoutPageFactory(){
+//        driver.get("https://the-internet.herokuapp.com/add_remove_elements/");
+//        WebElement addButton = driver.findElement(By.xpath("//button[contains(.,'Add')]"));
+//        addButton.click();
+//        WebElement deleteButton = driver.findElement(By.xpath("//button[contains(.,'Delete')]"));
+//        deleteButton.click();
+//
+//        addButton.click();
+//        deleteButton.click();
+//    }
+//
+//    @Test
+//    public void loginWithPageFactory(){
+//        driver.get("https://the-internet.herokuapp.com/add_remove_elements/");
+//        WebElement addButton = loginPageFactory.getAddButton();
+//        addButton.click();
+//        WebElement deleteButton = loginPageFactory.getDeleteButton();
+//        deleteButton.click();
+//
+//        addButton.click();
+//        deleteButton.click();
+//    }
 }
