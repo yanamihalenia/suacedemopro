@@ -16,6 +16,7 @@
         <selenium-java.version>4.28.1</selenium-java.version>
         <testng.version>7.10.2</testng.version>
         <webdrivermanager.version>5.9.2</webdrivermanager.version>
+        <lombok.version>1.18.36</lombok.version>
         <suiteXmlFile>sauceDemoCartTest.xml</suiteXmlFile>
     </properties>
 
@@ -59,5 +60,12 @@
             <artifactId>hamcrest</artifactId>
             <version>${hamcrest.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+
     </dependencies>
 </project>

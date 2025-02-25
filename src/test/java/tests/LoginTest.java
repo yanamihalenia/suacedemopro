@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class LoginTest extends BaseTest {
+public class LoginTest extends Preconditions {
     public static final String ERROR_USERNAME_TEXT_MESSAGE = "Epic sadface: Username is required";
     public static final String ERROR_PASSWORD_TEXT_MESSAGE = "Epic sadface: Password is required";
     public static final String ERROR_USERNAME_AND_PASSWORD_TEXT_MESSAGE = "Epic sadface: Username and password do not match any user in this service";
@@ -14,9 +14,7 @@ public class LoginTest extends BaseTest {
     //команда для запуска: mvn -Dtest=LoginTest -Dusername=standard_user -Dpassword=secret_sauce test
     public void successLoginTest(){
         loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(
-                System.getProperty("username"),
-                System.getProperty("password"));
+        loginPage.login(USERNAME, PASSWORD);
     }
 
     @Test
@@ -29,7 +27,7 @@ public class LoginTest extends BaseTest {
     @Test
     public void loginWithEmptyPasswordTest(){
         loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(USERNAME, "");
+        loginPage.login(userWithEmptyPassword);
         Assert.assertEquals(loginPage.getErrorMessageText(), ERROR_PASSWORD_TEXT_MESSAGE);
     }
 
