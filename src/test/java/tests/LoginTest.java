@@ -13,8 +13,7 @@ public class LoginTest extends Preconditions {
     @Test
     //команда для запуска: mvn -Dtest=LoginTest -Dusername=standard_user -Dpassword=secret_sauce test
     public void successLoginTest(){
-        loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(USERNAME, PASSWORD);
+        loginSteps.loginAndWaitForPageOpened(userWithEmptyUsername);
     }
 
     @Test
@@ -27,7 +26,7 @@ public class LoginTest extends Preconditions {
     @Test
     public void loginWithEmptyPasswordTest(){
         loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(userWithEmptyPassword);
+        loginPage.login(USERNAME, "");
         Assert.assertEquals(loginPage.getErrorMessageText(), ERROR_PASSWORD_TEXT_MESSAGE);
     }
 

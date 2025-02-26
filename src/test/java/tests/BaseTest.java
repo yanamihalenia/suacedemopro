@@ -7,6 +7,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pages.*;
+import steps.LoginSteps;
+import steps.ProductSteps;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,6 +22,8 @@ public class BaseTest implements IConstants, ITestConstants {
     CheckoutOverviewPage checkoutOverviewPage;
     CheckoutCompletePage checkoutCompletePage;
     LoginPageFactory loginPageFactory;
+    ProductSteps productSteps;
+    LoginSteps loginSteps;
 
 
     @BeforeMethod
@@ -40,6 +44,8 @@ public class BaseTest implements IConstants, ITestConstants {
         checkoutOverviewPage = new CheckoutOverviewPage(driver);
         checkoutCompletePage = new CheckoutCompletePage(driver);
         loginPageFactory = new LoginPageFactory(driver);
+        loginSteps = new LoginSteps(driver);
+        productSteps = new ProductSteps(driver);
     }
 
     @AfterMethod

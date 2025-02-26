@@ -3,6 +3,10 @@ package pages;
 import entity.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class LoginPage extends BasePage {
 
@@ -22,7 +26,19 @@ public class LoginPage extends BasePage {
         return new ProductsPage(driver);
     }
 
+    public void login(String userName, String password){
+        driver.findElement(USERNAME_INPUT).sendKeys(userName);
+        driver.findElement(PASSWORD_INPUT).sendKeys(password);
+        driver.findElement(LOGIN_BUTTON).click();
+    }
+
     public String getErrorMessageText(){
         return driver.findElement(LOGIN_ERROR_MESSAGE).getText();
+    }
+
+    public LoginPage waitForPageOpened() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
+        return this;
     }
 }
