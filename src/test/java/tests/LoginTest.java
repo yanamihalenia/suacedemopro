@@ -6,8 +6,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import waiters.Waiter;
 
-import static pages.LoginPage.LOGIN_BUTTON;
-
 public class LoginTest extends Preconditions {
     public static final String ERROR_USERNAME_TEXT_MESSAGE = "Epic sadface: Username is required";
     public static final String ERROR_PASSWORD_TEXT_MESSAGE = "Epic sadface: Password is required";
@@ -17,7 +15,6 @@ public class LoginTest extends Preconditions {
     @Test
     public void successLoginTest(){
         loginPage.openPage(LOGIN_PAGE_URL);
-        wait.waitForPageOpened(driver, LOGIN_BUTTON); // только так можно до переменной дотянуться через импорт в 9 строке???
         loginPage.login(userWithCorrectData);
     }
 

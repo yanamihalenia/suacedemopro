@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import waiters.Waiter;
 
 public class CheckoutCompletePage extends HeaderPage{
 
@@ -18,6 +19,8 @@ public class CheckoutCompletePage extends HeaderPage{
     }
 
     public boolean isCompleteHeaderDisplayed(){
+        Waiter wait = new Waiter();
+        wait.waitForPageOpened(driver, BACK_HOME_BUTTON);
         return driver.findElement(By.xpath(COMPLETE_HEADER)).isDisplayed();
     }
 
