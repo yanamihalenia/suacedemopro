@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import waiters.Waiter;
 
 public class CheckoutYourInfoPage extends HeaderPage{
 
@@ -16,6 +17,8 @@ public class CheckoutYourInfoPage extends HeaderPage{
     }
 
     public CheckoutYourInfoPage fillYourInfoForm(String firstName, String lastName, String postalCode){
+        Waiter wait = new Waiter();
+        wait.waitTillFormLoaded(driver, ZIP_CODE_FIELD);
         driver.findElement(FIRST_NAME_FIELD).sendKeys(firstName);
         driver.findElement(LAST_NAME_FIELD).sendKeys(lastName);
         driver.findElement(ZIP_CODE_FIELD).sendKeys(postalCode);
