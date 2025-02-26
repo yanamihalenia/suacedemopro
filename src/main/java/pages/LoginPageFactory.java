@@ -17,18 +17,18 @@ public class LoginPageFactory extends BasePage {
     WebElement loginErrorMessage;
 
 
-    @FindBy(xpath = "//button[contains(.,'Add')]")
-    WebElement addButton;
-    @FindBy(xpath = "//button[contains(.,'Delete')]")
-    WebElement deleteButton;
-
-    public WebElement getAddButton() {
-        return addButton;
-    }
-
-    public WebElement getDeleteButton() {
-        return deleteButton;
-    }
+//    @FindBy(xpath = "//button[contains(.,'Add')]")
+//    WebElement addButton;
+//    @FindBy(xpath = "//button[contains(.,'Delete')]")
+//    WebElement deleteButton;
+//
+//    public WebElement getAddButton() {
+//        return addButton;
+//    }
+//
+//    public WebElement getDeleteButton() {
+//        return deleteButton;
+//    }
 
     public LoginPageFactory(WebDriver driver) {
         super(driver);

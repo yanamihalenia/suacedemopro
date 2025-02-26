@@ -4,16 +4,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import waiters.Waiter;
+
+import static pages.LoginPage.LOGIN_BUTTON;
 
 public class LoginTest extends Preconditions {
     public static final String ERROR_USERNAME_TEXT_MESSAGE = "Epic sadface: Username is required";
     public static final String ERROR_PASSWORD_TEXT_MESSAGE = "Epic sadface: Password is required";
     public static final String ERROR_USERNAME_AND_PASSWORD_TEXT_MESSAGE = "Epic sadface: Username and password do not match any user in this service";
+    Waiter wait = new Waiter();
 
     @Test
-    //команда для запуска: mvn -Dtest=LoginTest -Dusername=standard_user -Dpassword=secret_sauce test
     public void successLoginTest(){
         loginPage.openPage(LOGIN_PAGE_URL);
+        wait.waitForPageOpened(driver, LOGIN_BUTTON); // только так можно до переменной дотянуться через импорт в 9 строке???
         loginPage.login(userWithCorrectData);
     }
 

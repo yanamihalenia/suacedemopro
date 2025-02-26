@@ -10,13 +10,16 @@ public class CheckoutTest extends Preconditions{
     public void makeAnOrderTest(){
         SoftAssert softAssert = new SoftAssert();
         loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(userWithCorrectData);
-        productsPage.addProduct(SAUCE_LABS_ONE_SIE);
-        headerPage.clickCart();
-        cartPage.clickCheckout();
-        checkoutYourInfoPage.fillYourInfoForm(FIRST_NAME, LAST_NAME, POSTAL_CODE);
-        checkoutYourInfoPage.clickContinue();
-        checkoutOverviewPage.clickFinish();
+        loginPage
+                .login(userWithCorrectData)
+                .addProduct(SAUCE_LABS_ONE_SIE);
+        headerPage
+                .clickCart()
+                .clickCheckout();
+        checkoutYourInfoPage
+                .fillYourInfoForm(FIRST_NAME, LAST_NAME, POSTAL_CODE)
+                .clickContinue()
+                .clickFinish();
         softAssert.assertTrue(checkoutCompletePage.isCompleteHeaderDisplayed());
         softAssert.assertTrue(checkoutCompletePage.isCompleteTextDisplayed());
         softAssert.assertAll();
@@ -25,8 +28,9 @@ public class CheckoutTest extends Preconditions{
     @Test(description = "Test case 3: Check Total price of items")
     public void checkTotalItemPriceTest(){
         loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(userWithCorrectData);
-        productsPage.addCoupleProducts(SAUCE_LABS_ONE_SIE, SAUCE_LABS_BOLT_T_SHIRT);
+        loginPage
+                .login(userWithCorrectData)
+                .addCoupleProducts(SAUCE_LABS_ONE_SIE, SAUCE_LABS_BOLT_T_SHIRT);
         cartPage.openPage(CHECKOUT_OVERVIEW_URL);
         double priceOneSie = checkoutOverviewPage.getProductPrice(SAUCE_LABS_ONE_SIE);
         double priceBoltTShirt = checkoutOverviewPage.getProductPrice(SAUCE_LABS_BOLT_T_SHIRT);
@@ -38,8 +42,9 @@ public class CheckoutTest extends Preconditions{
     @Test(description = "Test case 4: Check Total price with tax")
     public void checkTotalPriceTest(){
         loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(userWithCorrectData);
-        productsPage.addProduct(ALL_THE_THINGS_T_SHIRT_RED);
+        loginPage
+                .login(userWithCorrectData)
+                .addProduct(ALL_THE_THINGS_T_SHIRT_RED);
         cartPage.openPage(CHECKOUT_OVERVIEW_URL);
         double itemTotalPrice = checkoutOverviewPage.getItemTotalPrice();
         double taxPrice = checkoutOverviewPage.getTaxPrice();
@@ -51,8 +56,9 @@ public class CheckoutTest extends Preconditions{
     @Test(description = "Test case 5: 'Cancel' button links user to Products page")
     public void cancelButtonLinksToProductsTest(){
         loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(userWithCorrectData);
-        productsPage.addProduct(ALL_THE_THINGS_T_SHIRT_RED);
+        loginPage
+                .login(userWithCorrectData)
+                .addProduct(ALL_THE_THINGS_T_SHIRT_RED);
         cartPage.openPage(CHECKOUT_OVERVIEW_URL);
         checkoutOverviewPage.clickCancel();
         String currentUrl = productsPage.getUrl();

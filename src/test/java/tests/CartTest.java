@@ -22,8 +22,9 @@ public class CartTest extends Preconditions{
     @Test(dataProvider = "products")
     public void checkProductPriceInCartTest(String productName, String price){
         loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(userWithCorrectData);
-        productsPage.addProduct(productName);
+        loginPage
+                .login(userWithCorrectData)
+                .addProduct(productName);
         headerPage.clickCart();
         Assert.assertEquals(cartPage.getProductPrice(productName), price);
     }
@@ -56,16 +57,16 @@ public class CartTest extends Preconditions{
     @Test
     public void checkQuantityTest(){
         loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(userWithCorrectData);
-        productsPage.addProduct(SAUCE_LABS_BACKPACK);
+        loginPage
+                .login(userWithCorrectData)
+                .addProduct(SAUCE_LABS_BACKPACK);
         cartPage.openPage(CART_PAGE_URL);
         Assert.assertEquals(cartPage.getProductQuantity(),2);
     }
 
     @Test
     public void removeItemFromCartTest() {
-        loginPage
-                .openPage(LOGIN_PAGE_URL);
+        loginPage.openPage(LOGIN_PAGE_URL);
         loginPage
                 .login(userWithCorrectData)
                 .addProduct(SAUCE_LABS_BACKPACK);
