@@ -10,26 +10,22 @@ public class LoginTest extends Preconditions {
     public static final String ERROR_USERNAME_TEXT_MESSAGE = "Epic sadface: Username is required";
     public static final String ERROR_PASSWORD_TEXT_MESSAGE = "Epic sadface: Password is required";
     public static final String ERROR_USERNAME_AND_PASSWORD_TEXT_MESSAGE = "Epic sadface: Username and password do not match any user in this service";
-    Waiter wait = new Waiter();
 
     @Test
     public void successLoginTest(){
-        loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(userWithCorrectData);
+        loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
         Assert.assertEquals(driver.getCurrentUrl(), PRODUCTS_PAGE_URL);
     }
 
     @Test
     public void loginWithEmptyUsernameTest(){
-        loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(userWithEmptyUsername);
+        loginSteps.loginAndWaitForPageOpened(userWithEmptyUsername);
         Assert.assertEquals(loginPage.getErrorMessageText(), ERROR_USERNAME_TEXT_MESSAGE);
     }
 
     @Test
     public void loginWithEmptyPasswordTest(){
-        loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(userWithEmptyPassword);
+        loginSteps.loginAndWaitForPageOpened(userWithEmptyPassword);
         Assert.assertEquals(loginPage.getErrorMessageText(), ERROR_PASSWORD_TEXT_MESSAGE);
     }
 
