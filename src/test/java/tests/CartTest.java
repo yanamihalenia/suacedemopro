@@ -7,6 +7,8 @@ import org.testng.asserts.SoftAssert;
 
 public class CartTest extends Preconditions{
 
+    SoftAssert softAssert = new SoftAssert();
+
     @DataProvider(name = "products")
     public Object[][] productsAndPrices(){
         return new Object[][]{
@@ -21,22 +23,16 @@ public class CartTest extends Preconditions{
 
     @Test(dataProvider = "products")
     public void checkProductPriceInCartTest(String productName, String price){
-        loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(userWithCorrectData)
-                .addProduct(productName);
-        headerPage.clickCart();
+        loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
+        productSteps.addProductAndGoToCart(productName);
         Assert.assertEquals(cartPage.getProductPrice(productName), price);
     }
 
     @Test
     public void checkAddingProductToCartTest(){
-        SoftAssert softAssert = new SoftAssert();
-        loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(userWithCorrectData);
+        loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
         String productPrice = productsPage.getProductPrice(SAUCE_LABS_BOLT_T_SHIRT);
-        productsPage.addProduct(SAUCE_LABS_BOLT_T_SHIRT);
-        headerPage.clickCart();
+        productSteps.addCoupleProductsAndGoToCart(SAUCE_LABS_BOLT_T_SHIRT);
         String productPriceInCart = cartPage.getProductPrice(SAUCE_LABS_BOLT_T_SHIRT);
         String productNameInCart = cartPage.getProductName(SAUCE_LABS_BOLT_T_SHIRT);
         softAssert.assertEquals(productPriceInCart, productPrice, "Product prices are not match.");
@@ -46,33 +42,23 @@ public class CartTest extends Preconditions{
 
     @Test
     public void addProductToCartTest(){
-        loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(userWithCorrectData)
-                .addProduct(SAUCE_LABS_BACKPACK);
-        headerPage.clickCart();
+        loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
+        productSteps.addProductAndGoToCart(SAUCE_LABS_BACKPACK);
         Assert.assertEquals(cartPage.getProductPrice(SAUCE_LABS_BACKPACK), "$29.99");
     }
 
     @Test
     public void checkQuantityTest(){
-        loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(userWithCorrectData)
-                .addProduct(SAUCE_LABS_BACKPACK);
-        cartPage.openPage(CART_PAGE_URL);
+        loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
+        productSteps.addProductAndGoToCart(SAUCE_LABS_BACKPACK);
         Assert.assertEquals(cartPage.getProductQuantity(),2);
     }
 
     @Test
     public void removeItemFromCartTest() {
-        loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(userWithCorrectData)
-                .addProduct(SAUCE_LABS_BACKPACK);
-        cartPage
-                .openCartPage(CART_PAGE_URL)
-                .removeProductFromCart(SAUCE_LABS_BACKPACK);
+        loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
+        productSteps.addProductAndGoToCart(SAUCE_LABS_BACKPACK);
+        cartPage.removeProductFromCart(SAUCE_LABS_BACKPACK);
         Assert.assertFalse(cartPage.isProductDisplayed(SAUCE_LABS_BACKPACK));
     }
 }

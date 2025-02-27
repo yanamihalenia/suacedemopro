@@ -13,17 +13,14 @@ public class ProductsTest extends Preconditions {
 
     @Test
     public void isAddToCartButtonDisplayedTest(){
-        loginPage.openPage(IConstants.LOGIN_PAGE_URL);
-        loginPage.login(userWithCorrectData);
+        loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
         Assert.assertTrue(productsPage.isAddToCartButtonDisplayed(SAUCE_LABS_BACKPACK));
     }
 
     @Test
     public void isRemoveButtonDisplayedTest(){
-        loginPage.openPage(IConstants.LOGIN_PAGE_URL);
-        loginPage
-                .login(userWithCorrectData)
-                .addProduct(SAUCE_LABS_BACKPACK);
+        loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
+        productsPage.addProduct(SAUCE_LABS_BACKPACK);
         Assert.assertTrue(productsPage.isRemoveButtonDisplayed(SAUCE_LABS_BACKPACK));
     }
 
@@ -33,11 +30,9 @@ public class ProductsTest extends Preconditions {
         List<String> sortedItemList;
         List<Double> listOfPricesFromPage;
         List<Double> sortedPriceList;
+        loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
 
-        loginPage.openPage(IConstants.LOGIN_PAGE_URL);
-        loginPage
-                .login(userWithCorrectData)
-                .selectOptionInFilter(FILTER_FROM_A_TO_Z);
+        productsPage.selectOptionInFilter(FILTER_FROM_A_TO_Z);
         listOfItemsFromPage = productsPage.getListOfItems();
         sortedItemList = productsPage.sortProductsFromAtoZ(listOfItemsFromPage);
         softAssert.assertEquals(listOfItemsFromPage, sortedItemList);

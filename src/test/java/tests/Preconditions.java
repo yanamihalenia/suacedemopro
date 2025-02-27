@@ -10,8 +10,8 @@ public class Preconditions extends BaseTest {
             .build();
 
     protected final User userWithEmptyPassword = User.builder()
-            .username("")
-            .password(PASSWORD)
+            .username(USERNAME)
+            .password("")
             .build();
 
     protected final User userWithEmptyUsernameAndPassword = User.builder()
