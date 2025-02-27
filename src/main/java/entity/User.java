@@ -13,6 +13,4 @@ public class User {
     String username;
     String password;
 
-    public User(){
-    }
 }
