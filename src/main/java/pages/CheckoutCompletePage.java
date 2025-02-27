@@ -9,6 +9,7 @@ public class CheckoutCompletePage extends HeaderPage{
     private static final By BACK_HOME_BUTTON = By.id("back-home");
     private static final String COMPLETE_HEADER = "//*[@class=\"complete-header\"]";
     private static final String COMPLETE_MESSAGE = "//*[@class=\"complete-text\"]";
+    Waiter wait = new Waiter();
 
     public CheckoutCompletePage(WebDriver driver) {
         super(driver);
@@ -19,7 +20,6 @@ public class CheckoutCompletePage extends HeaderPage{
     }
 
     public boolean isCompleteHeaderDisplayed(){
-        Waiter wait = new Waiter();
         wait.waitForPageOpened(driver, BACK_HOME_BUTTON);
         return driver.findElement(By.xpath(COMPLETE_HEADER)).isDisplayed();
     }

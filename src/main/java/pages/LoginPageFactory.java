@@ -34,10 +34,11 @@ public class LoginPageFactory extends BasePage {
         super(driver);
     }
 
-    public void login(String userName, String password){
+    public LoginPageFactory login(String userName, String password){
         usernameInput.sendKeys(userName);
         passwordInput.sendKeys(password);
         loginButton.click();
+        return new LoginPageFactory(driver);
     }
 
     public String getErrorMessageText(){

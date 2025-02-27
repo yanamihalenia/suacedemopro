@@ -16,6 +16,7 @@ public class LoginTest extends Preconditions {
     public void successLoginTest(){
         loginPage.openPage(LOGIN_PAGE_URL);
         loginPage.login(userWithCorrectData);
+        Assert.assertEquals(driver.getCurrentUrl(), PRODUCTS_PAGE_URL);
     }
 
     @Test

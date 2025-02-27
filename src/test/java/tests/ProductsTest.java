@@ -39,22 +39,23 @@ public class ProductsTest extends Preconditions {
                 .login(userWithCorrectData)
                 .selectOptionInFilter(FILTER_FROM_A_TO_Z);
         listOfItemsFromPage = productsPage.getListOfItems();
-        sortedItemList = productsPage.checkFiltrationFromAtoZ(listOfItemsFromPage);
+        sortedItemList = productsPage.sortProductsFromAtoZ(listOfItemsFromPage);
         softAssert.assertEquals(listOfItemsFromPage, sortedItemList);
 
         productsPage.selectOptionInFilter(FILTER_FROM_Z_TO_A);
         listOfItemsFromPage = productsPage.getListOfItems();
-        sortedItemList = productsPage.checkFiltrationFromZtoA(listOfItemsFromPage);
+        sortedItemList = productsPage.sortProductsFromZtoA(listOfItemsFromPage);
         softAssert.assertEquals(listOfItemsFromPage, sortedItemList);
 
         productsPage.selectOptionInFilter(FILTER_FROM_LOW_TO_HIGH_PRICE);
         listOfPricesFromPage = productsPage.getListOfPrices();
-        sortedPriceList = productsPage.checkFiltrationFromLowToHigh(listOfPricesFromPage);
+        sortedPriceList = productsPage.sortProductsFromLowToHighPrice(listOfPricesFromPage);
         softAssert.assertEquals(listOfPricesFromPage, sortedPriceList);
 
         productsPage.selectOptionInFilter(FILTER_FROM_HIGH_TO_LOW_PRICE);
         listOfPricesFromPage = productsPage.getListOfPrices();
-        sortedPriceList = productsPage.checkFiltrationFromHighToLow(listOfPricesFromPage);
+        sortedPriceList = productsPage.sortProductsFromHighToLowPrice(listOfPricesFromPage);
         softAssert.assertEquals(listOfPricesFromPage, sortedPriceList);
+        softAssert.assertAll();
     }
 }

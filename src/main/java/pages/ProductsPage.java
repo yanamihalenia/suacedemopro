@@ -7,7 +7,6 @@ import org.openqa.selenium.support.ui.Select;
 //import org.testng.Assert;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,22 +58,22 @@ public class ProductsPage extends HeaderPage {
                         .trim())).collect(Collectors.toList());
     }
 
-    public List<String> checkFiltrationFromAtoZ(List<String> listOfItems){
+    public List<String> sortProductsFromAtoZ(List<String> listOfItems){
         Collections.sort(listOfItems);
         return listOfItems;
     }
 
-    public List<String> checkFiltrationFromZtoA(List<String> listOfItems){
+    public List<String> sortProductsFromZtoA(List<String> listOfItems){
         Collections.sort(listOfItems, Collections.reverseOrder());
         return listOfItems;
     }
 
-    public List<Double> checkFiltrationFromLowToHigh(List<Double> listOfPrices){
+    public List<Double> sortProductsFromLowToHighPrice(List<Double> listOfPrices){
         Collections.sort(listOfPrices);
         return listOfPrices;
     }
 
-    public List<Double> checkFiltrationFromHighToLow(List<Double> listOfPrices){
+    public List<Double> sortProductsFromHighToLowPrice(List<Double> listOfPrices){
         Collections.sort(listOfPrices, Collections.reverseOrder());
         return listOfPrices;
     }

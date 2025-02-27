@@ -30,7 +30,8 @@ public class CheckoutYourInfoPage extends HeaderPage{
         return new CheckoutOverviewPage(driver);
     }
 
-    public void clickCancel(){
+    public CartPage clickCancel(){
         driver.findElement(CANCEL_BUTTON).click();
+        return new CartPage(driver);
     }
 }
