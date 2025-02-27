@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 //import org.testng.Assert;
 
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,26 +58,24 @@ public class ProductsPage extends HeaderPage {
                         .trim())).collect(Collectors.toList());
     }
 
-    public void checkFiltrationFromAtoZ(List<String> listOfItems){
-        List<String> listOfItemsFromPage = listOfItems.stream().map(String::toLowerCase).collect(Collectors.toList());
-        List<String> sortedList = listOfItemsFromPage.stream().sorted().collect(Collectors.toList());
-//        Assert.assertEquals(listOfItemsFromPage, sortedList);
+    public List<String> sortProductsFromAtoZ(List<String> listOfItems){
+        Collections.sort(listOfItems);
+        return listOfItems;
     }
 
-    public void checkFiltrationFromZtoA(List<String> listOfItems){
-        List<String> listOfItemsFromPage = listOfItems.stream().map(String::toLowerCase).collect(Collectors.toList());
-        List<String> sortedList = listOfItemsFromPage.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
-//        Assert.assertEquals(listOfItemsFromPage, sortedList);
+    public List<String> sortProductsFromZtoA(List<String> listOfItems){
+        Collections.sort(listOfItems, Collections.reverseOrder());
+        return listOfItems;
     }
 
-    public void checkFiltrationFromLowToHigh(List<Double> listOfPrices){
-        List<Double> sortedList = listOfPrices.stream().sorted().collect(Collectors.toList());
-//        Assert.assertEquals(listOfPrices, sortedList);
+    public List<Double> sortProductsFromLowToHighPrice(List<Double> listOfPrices){
+        Collections.sort(listOfPrices);
+        return listOfPrices;
     }
 
-    public void checkFiltrationFromHighToLow(List<Double> listOfPrices){
-        List<Double> sortedList = listOfPrices.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
-//        Assert.assertEquals(listOfPrices, sortedList);
+    public List<Double> sortProductsFromHighToLowPrice(List<Double> listOfPrices){
+        Collections.sort(listOfPrices, Collections.reverseOrder());
+        return listOfPrices;
     }
 
     public void selectOptionInFilter(String sortOption){

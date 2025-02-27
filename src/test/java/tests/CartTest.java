@@ -5,7 +5,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class CartTest extends BaseTest{
+public class CartTest extends Preconditions{
 
     @DataProvider(name = "products")
     public Object[][] productsAndPrices(){
@@ -22,8 +22,9 @@ public class CartTest extends BaseTest{
     @Test(dataProvider = "products")
     public void checkProductPriceInCartTest(String productName, String price){
         loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(USERNAME,PASSWORD);
-        productsPage.addProduct(productName);
+        loginPage
+                .login(userWithCorrectData)
+                .addProduct(productName);
         headerPage.clickCart();
         Assert.assertEquals(cartPage.getProductPrice(productName), price);
     }
@@ -32,7 +33,7 @@ public class CartTest extends BaseTest{
     public void checkAddingProductToCartTest(){
         SoftAssert softAssert = new SoftAssert();
         loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(USERNAME, PASSWORD);
+        loginPage.login(userWithCorrectData);
         String productPrice = productsPage.getProductPrice(SAUCE_LABS_BOLT_T_SHIRT);
         productsPage.addProduct(SAUCE_LABS_BOLT_T_SHIRT);
         headerPage.clickCart();
@@ -46,8 +47,9 @@ public class CartTest extends BaseTest{
     @Test
     public void addProductToCartTest(){
         loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(USERNAME,PASSWORD);
-        productsPage.addProduct(SAUCE_LABS_BACKPACK);
+        loginPage
+                .login(userWithCorrectData)
+                .addProduct(SAUCE_LABS_BACKPACK);
         headerPage.clickCart();
         Assert.assertEquals(cartPage.getProductPrice(SAUCE_LABS_BACKPACK), "$29.99");
     }
@@ -55,18 +57,19 @@ public class CartTest extends BaseTest{
     @Test
     public void checkQuantityTest(){
         loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(USERNAME,PASSWORD);
-        productsPage.addProduct(SAUCE_LABS_BACKPACK);
+        loginPage
+                .login(userWithCorrectData)
+                .addProduct(SAUCE_LABS_BACKPACK);
         cartPage.openPage(CART_PAGE_URL);
         Assert.assertEquals(cartPage.getProductQuantity(),2);
     }
 
     @Test
     public void removeItemFromCartTest() {
+        loginPage.openPage(LOGIN_PAGE_URL);
         loginPage
-                .openPage(LOGIN_PAGE_URL);
-        loginPage.login(USERNAME, PASSWORD);
-        productsPage.addProduct(SAUCE_LABS_BACKPACK);
+                .login(userWithCorrectData)
+                .addProduct(SAUCE_LABS_BACKPACK);
         cartPage
                 .openCartPage(CART_PAGE_URL)
                 .removeProductFromCart(SAUCE_LABS_BACKPACK);

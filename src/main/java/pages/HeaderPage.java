@@ -10,7 +10,8 @@ public class HeaderPage extends BasePage {
         super(driver);
     }
 
-    public void clickCart(){
+    public CartPage clickCart(){
         driver.findElement(CART_BUTTON).click();
+        return new CartPage(driver);
     }
 }
