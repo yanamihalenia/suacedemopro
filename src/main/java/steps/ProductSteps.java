@@ -1,12 +1,13 @@
 package steps;
 
+import constants.IConstants;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
-import pages.CartPage;
 import pages.HeaderPage;
 import pages.ProductsPage;
 
 
-public class ProductSteps {
+public class ProductSteps implements IConstants {
     private ProductsPage productsPage;
     private HeaderPage headerPage;
 
@@ -15,13 +16,15 @@ public class ProductSteps {
         headerPage = new HeaderPage(driver);
     }
 
-    public void addProductAndGoToCart(String productName){
-        productsPage.addProduct(productName);
+    @Step("Add one and more products and open cart")
+    public void addProductsAndGoToCart(String... productNames){
+        productsPage.addCoupleProducts(productNames);
         headerPage.clickCart();
     }
 
-    public void addCoupleProductsAndGoToCart(String... productNames){
+    @Step("Add one and more products and open overview")
+    public void addProductsAndGoToOverview(String... productNames){
         productsPage.addCoupleProducts(productNames);
-        headerPage.clickCart();
+        headerPage.openPage(CHECKOUT_OVERVIEW_URL);
     }
 }

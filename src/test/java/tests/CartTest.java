@@ -24,7 +24,7 @@ public class CartTest extends Preconditions{
     @Test(dataProvider = "products")
     public void checkProductPriceInCartTest(String productName, String price){
         loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
-        productSteps.addProductAndGoToCart(productName);
+        productSteps.addProductsAndGoToCart(productName);
         Assert.assertEquals(cartPage.getProductPrice(productName), price);
     }
 
@@ -32,7 +32,7 @@ public class CartTest extends Preconditions{
     public void checkAddingProductToCartTest(){
         loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
         String productPrice = productsPage.getProductPrice(SAUCE_LABS_BOLT_T_SHIRT);
-        productSteps.addCoupleProductsAndGoToCart(SAUCE_LABS_BOLT_T_SHIRT);
+        productSteps.addProductsAndGoToCart(SAUCE_LABS_BOLT_T_SHIRT);
         String productPriceInCart = cartPage.getProductPrice(SAUCE_LABS_BOLT_T_SHIRT);
         String productNameInCart = cartPage.getProductName(SAUCE_LABS_BOLT_T_SHIRT);
         softAssert.assertEquals(productPriceInCart, productPrice, "Product prices are not match.");
@@ -43,21 +43,21 @@ public class CartTest extends Preconditions{
     @Test
     public void addProductToCartTest(){
         loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
-        productSteps.addProductAndGoToCart(SAUCE_LABS_BACKPACK);
+        productSteps.addProductsAndGoToCart(SAUCE_LABS_BACKPACK);
         Assert.assertEquals(cartPage.getProductPrice(SAUCE_LABS_BACKPACK), "$29.99");
     }
 
     @Test
     public void checkQuantityTest(){
         loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
-        productSteps.addProductAndGoToCart(SAUCE_LABS_BACKPACK);
+        productSteps.addProductsAndGoToCart(SAUCE_LABS_BACKPACK);
         Assert.assertEquals(cartPage.getProductQuantity(),2);
     }
 
     @Test
     public void removeItemFromCartTest() {
         loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
-        productSteps.addProductAndGoToCart(SAUCE_LABS_BACKPACK);
+        productSteps.addProductsAndGoToCart(SAUCE_LABS_BACKPACK);
         cartPage.removeProductFromCart(SAUCE_LABS_BACKPACK);
         Assert.assertFalse(cartPage.isProductDisplayed(SAUCE_LABS_BACKPACK));
     }

@@ -17,12 +17,14 @@ public class CheckoutOverviewPage extends HeaderPage{
         super(driver);
     }
 
-    public void clickCancel(){
+    public ProductsPage clickCancel(){
         driver.findElement(CANCEL_BUTTON).click();
+        return new ProductsPage(driver);
     }
 
-    public void clickFinish(){
+    public CheckoutCompletePage clickFinish(){
         driver.findElement(FINISH_BUTTON).click();
+        return new CheckoutCompletePage(driver);
     }
 
     public double getItemTotalPrice(){
