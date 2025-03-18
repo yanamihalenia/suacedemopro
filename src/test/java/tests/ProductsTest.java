@@ -1,6 +1,5 @@
 package tests;
 
-import constants.IConstants;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -13,49 +12,23 @@ public class ProductsTest extends Preconditions {
 
     @Test
     public void isAddToCartButtonDisplayedTest(){
-        loginPage.openPage(IConstants.LOGIN_PAGE_URL);
-        loginPage.login(userWithCorrectData);
+        loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
         Assert.assertTrue(productsPage.isAddToCartButtonDisplayed(SAUCE_LABS_BACKPACK));
     }
 
     @Test
     public void isRemoveButtonDisplayedTest(){
-        loginPage.openPage(IConstants.LOGIN_PAGE_URL);
-        loginPage
-                .login(userWithCorrectData)
-                .addProduct(SAUCE_LABS_BACKPACK);
+        loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
+        productsPage.addProduct(SAUCE_LABS_BACKPACK);
         Assert.assertTrue(productsPage.isRemoveButtonDisplayed(SAUCE_LABS_BACKPACK));
     }
 
     @Test(description = "Test case 1: Check filter on products page")
     public void checkFilterTest(){
-        List<String> listOfItemsFromPage;
-        List<String> sortedItemList;
-        List<Double> listOfPricesFromPage;
-        List<Double> sortedPriceList;
-
-        loginPage.openPage(IConstants.LOGIN_PAGE_URL);
-        loginPage
-                .login(userWithCorrectData)
-                .selectOptionInFilter(FILTER_FROM_A_TO_Z);
-        listOfItemsFromPage = productsPage.getListOfItems();
-        sortedItemList = productsPage.sortProductsFromAtoZ(listOfItemsFromPage);
-        softAssert.assertEquals(listOfItemsFromPage, sortedItemList);
-
-        productsPage.selectOptionInFilter(FILTER_FROM_Z_TO_A);
-        listOfItemsFromPage = productsPage.getListOfItems();
-        sortedItemList = productsPage.sortProductsFromZtoA(listOfItemsFromPage);
-        softAssert.assertEquals(listOfItemsFromPage, sortedItemList);
-
-        productsPage.selectOptionInFilter(FILTER_FROM_LOW_TO_HIGH_PRICE);
-        listOfPricesFromPage = productsPage.getListOfPrices();
-        sortedPriceList = productsPage.sortProductsFromLowToHighPrice(listOfPricesFromPage);
-        softAssert.assertEquals(listOfPricesFromPage, sortedPriceList);
-
-        productsPage.selectOptionInFilter(FILTER_FROM_HIGH_TO_LOW_PRICE);
-        listOfPricesFromPage = productsPage.getListOfPrices();
-        sortedPriceList = productsPage.sortProductsFromHighToLowPrice(listOfPricesFromPage);
-        softAssert.assertEquals(listOfPricesFromPage, sortedPriceList);
-        softAssert.assertAll();
+        loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
+        productSteps.filterProductsFromAToZ(FILTER_FROM_A_TO_Z);
+        productSteps.filterProductsFromZToA(FILTER_FROM_Z_TO_A);
+        productSteps.filterProductsFromLowToHigh(FILTER_FROM_LOW_TO_HIGH_PRICE);
+        productSteps.filterProductsFromHighToLow(FILTER_FROM_HIGH_TO_LOW_PRICE);
     }
 }

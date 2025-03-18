@@ -1,10 +1,7 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import waiters.Waiter;
 
 public class LoginTest extends Preconditions {
     public static final String ERROR_USERNAME_TEXT_MESSAGE = "Epic sadface: Username is required";
@@ -31,15 +28,13 @@ public class LoginTest extends Preconditions {
 
     @Test
     public void loginWithIncorrectFieldsTest(){
-        loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(userWithIncorrectData);
+        loginSteps.loginAndWaitForPageOpened(userWithIncorrectData);
         Assert.assertEquals(loginPage.getErrorMessageText(), ERROR_USERNAME_AND_PASSWORD_TEXT_MESSAGE);
     }
 
     @Test
     public void loginWithEmptyFieldsTest(){
-        loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(userWithEmptyUsernameAndPassword);
+        loginSteps.loginAndWaitForPageOpened(userWithEmptyUsernameAndPassword);
         Assert.assertEquals(loginPage.getErrorMessageText(), ERROR_USERNAME_TEXT_MESSAGE);
     }
 

@@ -78,10 +78,11 @@ public class ProductsPage extends HeaderPage {
         return listOfPrices;
     }
 
-    public void selectOptionInFilter(String sortOption){
+    public ProductsPage selectOptionInFilter(String sortOption){
         WebElement selectElement = driver.findElement(By.xpath(FILTER_LOCATOR));
         Select dropdown = new Select(selectElement);
         dropdown.selectByValue(sortOption);
+        return new ProductsPage(driver);
     }
 
     public String getUrl(){

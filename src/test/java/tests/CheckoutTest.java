@@ -6,20 +6,13 @@ import org.testng.asserts.SoftAssert;
 
 public class CheckoutTest extends Preconditions{
 
+    SoftAssert softAssert = new SoftAssert();
+
     @Test(description = "Test case 2: Make an order")
     public void makeAnOrderTest(){
-        SoftAssert softAssert = new SoftAssert();
-        loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(userWithCorrectData)
-                .addProduct(SAUCE_LABS_ONE_SIE);
-        headerPage
-                .clickCart()
-                .clickCheckout();
-        checkoutYourInfoPage
-                .fillYourInfoForm(FIRST_NAME, LAST_NAME, POSTAL_CODE)
-                .clickContinue()
-                .clickFinish();
+        loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
+        productSteps.addProductsAndGoToCart(SAUCE_LABS_ONE_SIE);
+        cartSteps.placeAnOrder(FIRST_NAME, LAST_NAME, POSTAL_CODE);
         softAssert.assertTrue(checkoutCompletePage.isCompleteHeaderDisplayed());
         softAssert.assertTrue(checkoutCompletePage.isCompleteTextDisplayed());
         softAssert.assertAll();
@@ -27,11 +20,8 @@ public class CheckoutTest extends Preconditions{
 
     @Test(description = "Test case 3: Check Total price of items")
     public void checkTotalItemPriceTest(){
-        loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(userWithCorrectData)
-                .addCoupleProducts(SAUCE_LABS_ONE_SIE, SAUCE_LABS_BOLT_T_SHIRT);
-        cartPage.openPage(CHECKOUT_OVERVIEW_URL);
+        loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
+        productSteps.addProductsAndGoToOverview(SAUCE_LABS_ONE_SIE,SAUCE_LABS_BOLT_T_SHIRT);
         double priceOneSie = checkoutOverviewPage.getProductPrice(SAUCE_LABS_ONE_SIE);
         double priceBoltTShirt = checkoutOverviewPage.getProductPrice(SAUCE_LABS_BOLT_T_SHIRT);
         double sumOfProductsPrice = priceOneSie + priceBoltTShirt;
@@ -41,11 +31,8 @@ public class CheckoutTest extends Preconditions{
 
     @Test(description = "Test case 4: Check Total price with tax")
     public void checkTotalPriceTest(){
-        loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(userWithCorrectData)
-                .addProduct(ALL_THE_THINGS_T_SHIRT_RED);
-        cartPage.openPage(CHECKOUT_OVERVIEW_URL);
+        loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
+        productSteps.addProductsAndGoToOverview(ALL_THE_THINGS_T_SHIRT_RED);
         double itemTotalPrice = checkoutOverviewPage.getItemTotalPrice();
         double taxPrice = checkoutOverviewPage.getTaxPrice();
         double sumItemPriceAndTax = itemTotalPrice + taxPrice;
@@ -55,11 +42,8 @@ public class CheckoutTest extends Preconditions{
 
     @Test(description = "Test case 5: 'Cancel' button links user to Products page")
     public void cancelButtonLinksToProductsTest(){
-        loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(userWithCorrectData)
-                .addProduct(ALL_THE_THINGS_T_SHIRT_RED);
-        cartPage.openPage(CHECKOUT_OVERVIEW_URL);
+        loginSteps.loginAndWaitForPageOpened(userWithCorrectData);
+        productSteps.addProductsAndGoToOverview(ALL_THE_THINGS_T_SHIRT_RED);
         checkoutOverviewPage.clickCancel();
         String currentUrl = productsPage.getUrl();
         Assert.assertEquals(currentUrl, PRODUCTS_PAGE_URL);

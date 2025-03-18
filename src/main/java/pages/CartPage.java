@@ -42,7 +42,8 @@ public class CartPage extends HeaderPage{
         return !driver.findElements(By.xpath(String.format(PRODUCT_ITEM, productName))).isEmpty();
     }
 
-    public void clickCheckout(){
+    public CheckoutYourInfoPage clickCheckout(){
         driver.findElement(CHECKOUT_BUTTON).click();
+        return new CheckoutYourInfoPage(driver);
     }
 }

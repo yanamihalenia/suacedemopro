@@ -22,7 +22,7 @@ public class LoginSteps {
         return this;
     }
 
-    @Step
+    @Step("Login and wait for page opened")
     public LoginSteps loginAndWaitForPageOpened(User user){
         loginPage.openPage(IConstants.LOGIN_PAGE_URL);
         loginPage
