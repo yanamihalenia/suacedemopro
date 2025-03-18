@@ -30,7 +30,7 @@ public class CartPage extends HeaderPage{
         return driver.findElement(By.xpath(String.format(PRODUCT_NAME, productName))).getText();
     }
 
-    public Integer getProductQuantity(){
+    public int getProductQuantity(){
         return driver.findElements(By.xpath(CART_ITEM_CONTAINER)).size();
     }
 
